@@ -1,7 +1,11 @@
 package practice.springframework.Models;
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Data
+@EqualsAndHashCode(exclude = "recipe")
 @Entity
 public class Note {
     @Id
@@ -14,23 +18,11 @@ public class Note {
     @Lob
     private String recipeNote;
 
-    public Long getId() {
-        return id;
+    public Note() {
     }
 
-    public Recipe getRecipe() {
-        return recipe;
+    protected boolean canEqual(final Object other) {
+        return other instanceof Note;
     }
 
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    public String getRecipeNote() {
-        return recipeNote;
-    }
-
-    public void setRecipeNote(String recipeNote) {
-        this.recipeNote = recipeNote;
-    }
 }
