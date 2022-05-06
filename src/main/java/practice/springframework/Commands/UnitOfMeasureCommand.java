@@ -10,4 +10,12 @@ import lombok.Setter;
 public class UnitOfMeasureCommand {
     private Long id;
     private String uom;
+
+    @Override
+    public String toString() {
+        return "UnitOfMeasureCommand{" +
+                "id=" + id +
+                ", uom='" + uom + '\'' +
+                '}';
+    }
 }

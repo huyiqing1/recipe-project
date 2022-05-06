@@ -15,4 +15,15 @@ public class IngredientCommand {
     private String description;
     private BigDecimal amount;
     private UnitOfMeasureCommand unitOfMeasureCommand;
+
+    @Override
+    public String toString() {
+        return "IngredientCommand{" +
+                "id=" + id +
+                ", recipeId=" + recipeId +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                ", unitOfMeasureCommand=" + unitOfMeasureCommand +
+                '}';
+    }
 }
