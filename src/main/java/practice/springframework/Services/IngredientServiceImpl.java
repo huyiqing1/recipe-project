@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import practice.springframework.Commands.IngredientCommand;
 import practice.springframework.Converters.IngredientCommandToIngredient;
 import practice.springframework.Converters.IngredientToIngredientCommand;
+import practice.springframework.Exceptions.NotFoundException;
 import practice.springframework.Models.Ingredient;
 import practice.springframework.Models.Recipe;
 import practice.springframework.Repositories.RecipeRepository;
@@ -35,7 +36,7 @@ public class IngredientServiceImpl implements IngredientService {
         Optional<Recipe> recipeOptional = recipeRepository.findById(recipeId);
 
         if (!recipeOptional.isPresent()) {
-            log.error("Recipe id not found. Id: " + recipeId);
+            throw new NotFoundException("Recipe id not found. ID: " + recipeId.toString());
         }
 
         Recipe recipe = recipeOptional.get();
@@ -44,7 +45,7 @@ public class IngredientServiceImpl implements IngredientService {
                 .map(ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
 
         if (!ingredientCommandOptional.isPresent()) {
-            log.error("Ingredient id not found. Id: " + ingredientId);
+            throw new NotFoundException("Ingredient id not found. ID: " + ingredientId.toString());
         }
         IngredientCommand ingredientCommand = ingredientCommandOptional.get();
         ingredientCommand.setRecipeId(recipeId);
@@ -64,7 +65,7 @@ public class IngredientServiceImpl implements IngredientService {
                     .filter(ingredient -> ingredient.getId().equals(ingredientId))
                     .findFirst();
 
-            if(ingredientOptional.isPresent()){
+            if (ingredientOptional.isPresent()) {
                 Ingredient ingredientToDelete = ingredientOptional.get();
                 ingredientToDelete.setRecipe(null);
                 recipe.getIngredients().remove(ingredientOptional.get());
