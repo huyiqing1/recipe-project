@@ -42,7 +42,6 @@ public class RecipeCommand {
     private String direction;
 
     private String source;
-
     private Set<IngredientCommand> ingredients = new HashSet<>();
     private Byte[] image;
     private Difficulty difficulty;
